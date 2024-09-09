@@ -1,6 +1,5 @@
 package br.edu.unifametro.aluno.agendeja.request.user;
 
-import br.edu.unifametro.aluno.agendeja.domain.user.enums.Role;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
@@ -9,6 +8,9 @@ import lombok.Data;
 
 @Data
 public class UserPostRequestBody {
+
+    @NotBlank
+    private String externalId;
 
     @NotBlank(message = "Field 'government Id' must not be empty")
     @Size(min=11, max=14, message = "Field 'government Id' must be between 11 and 14")
@@ -35,5 +37,5 @@ public class UserPostRequestBody {
     private char[] password;
 
     @NotBlank
-    private Role role;
+    private String role;
 }

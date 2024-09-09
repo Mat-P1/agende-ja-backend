@@ -25,17 +25,17 @@ public class User {
     @Column(name = "government_id", nullable = false, updatable = false, unique = true, length = 14)
     private String governmentId;
 
-    @Column(name = "first_name", nullable = false)
+    @Column(name = "first_name", nullable = false, length = 30)
     private String firstName;
 
-    @Column(name = "last_name", nullable = false)
+    @Column(name = "last_name", nullable = false, length = 35)
     private String lastName;
 
     @Column(name = "email", nullable = false, unique = true)
     private String email;
 
     @Column(name = "password", nullable = false, unique = true)
-    private String password;
+    private char[] password;
 
     @Column(name = "phone", unique = true, length = 14)
     private String phone;

@@ -1,5 +1,6 @@
 package br.edu.unifametro.aluno.agendeja.request.user;
 
+import br.edu.unifametro.aluno.agendeja.domain.user.enums.Role;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
@@ -32,4 +33,7 @@ public class UserPostRequestBody {
     @Size(min = 8, max = 64, message = "Field 'password' must be between 8 and 64 characters long")
     @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[\\W_])^[\\x21-\\x7e]{8,64}$", message = "Password must contain at least one digit, one lowercase letter, one upper case letter and one special character")
     private char[] password;
+
+    @NotBlank
+    private Role role;
 }

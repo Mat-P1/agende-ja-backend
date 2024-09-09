@@ -1,5 +1,6 @@
 package br.edu.unifametro.aluno.agendeja.domain.user;
 
+import br.edu.unifametro.aluno.agendeja.domain.user.enums.Role;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -39,4 +40,7 @@ public class User {
 
     @Column(name = "phone", unique = true, length = 14)
     private String phone;
+
+    @Column(name = "role", nullable = false)
+    private Role role;
 }

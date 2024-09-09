@@ -1,7 +1,8 @@
 /target/
 !.mvn/wrapper/maven-wrapper.jar
 HELP.md
-/src/main/resources/env.properties
+docker-compose.yml
+src/main/resources/env.properties
 
 ### STS ###
 .apt_generated

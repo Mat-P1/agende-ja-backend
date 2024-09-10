@@ -11,6 +11,20 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * UserController handles user-related operations such as sign-up and registration.
+ * This controller provides REST API endpoints for user creation.
+ * It interacts with the UserService to perform business logic.
+ * <p>
+ * Annotations:
+ * - @RestController: Marks this class as a REST controller, responsible for handling HTTP requests.
+ * - @RequestMapping("users"): Maps HTTP requests to /users URI for user-related operations.
+ * - @RequiredArgsConstructor: Automatically generates a constructor for required fields, promoting dependency injection.
+ * <p>
+ * Dependencies:
+ * - UserService: Service class to handle user creation and other user-related business logic.
+ */
+
 @RestController
 @RequestMapping("users")
 @RequiredArgsConstructor
@@ -18,8 +32,17 @@ public class UserController {
 
     private final UserService userService;
 
-    @PostMapping("/signup")
-    public ResponseEntity<User> signUp(@RequestBody UserPostRequestBody user) {
+    /**
+     * Handles HTTP POST requests to /sign-in for user registration.
+     * The method receives a {@link UserPostRequestBody} as a JSON payload and
+     * returns the created {@link User} with HTTP status 201 (CREATED).
+     *
+     * @param user The user registration details encapsulated in a {@link UserPostRequestBody}.
+     * @return A {@link ResponseEntity} containing the created {@link User} and an HTTP status of CREATED.
+     */
+
+    @PostMapping("/sign-in")
+    public ResponseEntity<User> signIn(@RequestBody UserPostRequestBody user) {
         return new ResponseEntity<>(userService.create(user), HttpStatus.CREATED);
     }
 }

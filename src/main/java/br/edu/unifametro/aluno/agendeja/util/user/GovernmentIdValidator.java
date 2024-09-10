@@ -126,7 +126,7 @@ public class GovernmentIdValidator {
     }
 
     /**
-     * Calculates and verifies if the CPF's check digits are valid.
+     * Calculates and verifies if the CNPJ's check digits are valid.
      *
      * @param governmentId The CNPJ to be validated.
      * @return true if the CNPJ are valid, false otherwise.

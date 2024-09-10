@@ -41,6 +41,6 @@ public class User {
     @Column(name = "phone", unique = true, length = 14)
     private String phone;
 
-    @Column(name = "role", nullable = false)
+    @Column(name = "role", nullable = false, length = 10)
     private Role role;
 }

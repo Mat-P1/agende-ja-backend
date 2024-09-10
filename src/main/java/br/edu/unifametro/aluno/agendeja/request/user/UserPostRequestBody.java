@@ -23,7 +23,7 @@ public class UserPostRequestBody {
     private String firstName;
 
     @NotBlank(message = "Field 'last name' must not be empty")
-    @Size(min=3, max=30, message = "Field 'last name' must be between 3 and 35")
+    @Size(min=3, max=35, message = "Field 'last name' must be between 3 and 35")
     @Pattern(regexp="^[A-ZÀ-ÖØ-ÝĀ-ŽÀ-ÿÇ][a-zà-öø-ÿā-žç]+(?:[-' ][A-ZÀ-ÖØ-ÝĀ-ŽÀ-ÿÇ][a-zà-öø-ÿā-žç]+)?$", message = "Field 'last name' must contain valid letters")
     private String lastName;
 

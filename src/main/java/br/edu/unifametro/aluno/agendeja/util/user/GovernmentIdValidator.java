@@ -46,15 +46,22 @@ public class GovernmentIdValidator {
     }
 
     /**
-     * Checks if a government ID is a CPF or CNPJ.
+     * Checks if a government ID is a CNPJ.
      *
-     * @param governmentId The government ID to be checked.
-     * @return true if the government ID is a CPF (11 digits) or CNPJ (14 digits), false otherwise.
+     * @param governmentId The CNPJ to be checked.
+     * @return true if the government ID is a CNPJ (14 digits), false otherwise.
      */
 
     public static boolean isCnpj(String governmentId) {
         return governmentId.length() == 14;
     }
+
+    /**
+     * Checks if a government ID is a CPF.
+     *
+     * @param governmentId The CPF to be checked.
+     * @return true if the government ID is a CPF (11 digits), false otherwise.
+     */
 
     private static boolean isCpf(String governmentId) {
         return governmentId.length() == 11;
@@ -77,9 +84,9 @@ public class GovernmentIdValidator {
     }
 
     /**
-     * Calculates and verifies if the CPF's or CNPJ's check digits are valid.
+     * Calculates and verifies if the CPF's check digits are valid.
      *
-     * @param governmentId The CPF or CNPJ to be validated.
+     * @param governmentId The CPF to be validated.
      * @return true if the CPF or CNPJ are valid, false otherwise.
      */
 
@@ -117,6 +124,13 @@ public class GovernmentIdValidator {
             return false;
         }
     }
+
+    /**
+     * Calculates and verifies if the CPF's check digits are valid.
+     *
+     * @param governmentId The CNPJ to be validated.
+     * @return true if the CNPJ are valid, false otherwise.
+     */
 
     private static boolean calculateCnpj(String governmentId) {
 

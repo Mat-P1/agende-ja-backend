@@ -2,6 +2,17 @@ package br.edu.unifametro.aluno.agendeja.util.user;
 
 import java.util.List;
 
+/**
+ * The {@code GovernmentIdValidator} class provides utilities for validating
+ * Brazilian government-issued IDs: CPF (Cadastro de Pessoas Físicas) and
+ * CNPJ (Cadastro Nacional da Pessoa Jurídica). It validates these IDs by
+ * verifying their length, ensuring they are not composed of repeated sequences
+ * of the same number, and calculating check digits to confirm the ID's validity.
+ *
+ * <p>CPF is an 11-digit number, and CNPJ is a 14-digit number. This class
+ * provides methods to identify the type of ID and validate its structure and check digits.
+ */
+
 public class GovernmentIdValidator {
 
     private static final List<String> SAME_NUMBER_SEQUENCE = List.of(

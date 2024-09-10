@@ -33,7 +33,7 @@ public class UserController {
     private final UserService userService;
 
     /**
-     * Handles HTTP POST requests to /sign-in for user registration.
+     * Handles HTTP POST requests to /sign-up for user registration.
      * The method receives a {@link UserPostRequestBody} as a JSON payload and
      * returns the created {@link User} with HTTP status 201 (CREATED).
      *
@@ -41,8 +41,8 @@ public class UserController {
      * @return A {@link ResponseEntity} containing the created {@link User} and an HTTP status of CREATED.
      */
 
-    @PostMapping("/sign-in")
-    public ResponseEntity<User> signIn(@RequestBody UserPostRequestBody user) {
+    @PostMapping("/sign-up")
+    public ResponseEntity<User> signUp(@RequestBody UserPostRequestBody user) {
         return new ResponseEntity<>(userService.create(user), HttpStatus.CREATED);
     }
 }

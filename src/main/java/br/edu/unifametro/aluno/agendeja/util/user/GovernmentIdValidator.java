@@ -87,7 +87,7 @@ public class GovernmentIdValidator {
      * Calculates and verifies if the CPF's check digits are valid.
      *
      * @param governmentId The CPF to be validated.
-     * @return true if the CPF or CNPJ are valid, false otherwise.
+     * @return true if the CPF is valid, false otherwise.
      */
 
     private static boolean calculateCpf(String governmentId) {
@@ -129,7 +129,7 @@ public class GovernmentIdValidator {
      * Calculates and verifies if the CNPJ's check digits are valid.
      *
      * @param governmentId The CNPJ to be validated.
-     * @return true if the CNPJ are valid, false otherwise.
+     * @return true if the CNPJ is valid, false otherwise.
      */
 
     private static boolean calculateCnpj(String governmentId) {

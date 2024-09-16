@@ -1,7 +1,9 @@
 package br.edu.unifametro.aluno.agendeja.controller;
 
 import br.edu.unifametro.aluno.agendeja.domain.user.User;
+import br.edu.unifametro.aluno.agendeja.request.login.LoginRequest;
 import br.edu.unifametro.aluno.agendeja.request.user.UserPostRequestBody;
+import br.edu.unifametro.aluno.agendeja.service.LoginService;
 import br.edu.unifametro.aluno.agendeja.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -31,6 +33,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController {
 
     private final UserService userService;
+    private final LoginService loginService;
 
     /**
      * Handles HTTP POST requests to /sign-up for user registration.
@@ -44,5 +47,10 @@ public class UserController {
     @PostMapping("/sign-up")
     public ResponseEntity<User> signUp(@RequestBody UserPostRequestBody user) {
         return new ResponseEntity<>(userService.create(user), HttpStatus.CREATED);
+    }
+
+    @PostMapping("/sign-in")
+    public ResponseEntity<?> signIn(@RequestBody LoginRequest loginRequest) {
+        return new ResponseEntity<>(loginService.findByEmail(loginRequest), HttpStatus.OK);
     }
 }

@@ -3,6 +3,8 @@ package br.edu.unifametro.aluno.agendeja.repository;
 import br.edu.unifametro.aluno.agendeja.domain.user.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.Optional;
+
 /**
  * UserRepository is a repository interface for managing {@link User} entities in the database.
  * It extends the {@link JpaRepository} interface provided by Spring Data JPA, which offers CRUD operations
@@ -23,4 +25,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface UserRepository extends JpaRepository<User, Long> {
 
+    Optional<User> findByEmail(String email);
 }

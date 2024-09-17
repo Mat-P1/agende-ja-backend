@@ -1,0 +1,13 @@
+services:
+  db:
+    image: mysql
+    container_name: agendeja_mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "3306:3306"
+    volumes:
+      - agendeja_data:/var/lib/mysql
+
+volumes:
+  agendeja_data:

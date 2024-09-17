@@ -1,6 +1,5 @@
 package br.edu.unifametro.aluno.agendeja.service;
 
-import br.edu.unifametro.aluno.agendeja.domain.user.User;
 import br.edu.unifametro.aluno.agendeja.repository.UserRepository;
 import br.edu.unifametro.aluno.agendeja.request.login.LoginRequest;
 import lombok.RequiredArgsConstructor;
@@ -16,13 +15,13 @@ public class LoginService {
 
     private final UserRepository userRepository;
 
-    public Optional<User> findByEmail(LoginRequest loginRequest) {
+    public Optional<Boolean> findByEmail(LoginRequest loginRequest) {
         var user = userRepository.findByEmail(loginRequest.email());
 
         if (user.isEmpty() || !Arrays.equals(user.get().getPassword(), loginRequest.password()) || !user.get().getEmail().equals(loginRequest.email())) {
             throw new BadCredentialsException("Invalid email or password");
         }
 
-        return Optional.empty();
+        return Optional.of(true);
     }
 }

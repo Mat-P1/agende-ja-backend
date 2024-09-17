@@ -54,6 +54,6 @@ public class UserService {
             userRepository.save(UserMapper.INSTANCE.postRequestBodyToUser(user));
         }
 
-        return null;
+        return UserMapper.INSTANCE.postRequestBodyToUser(user);
     }
 }

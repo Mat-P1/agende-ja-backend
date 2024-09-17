@@ -8,10 +8,7 @@ import br.edu.unifametro.aluno.agendeja.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * UserController handles user-related operations such as sign-up and registration.
@@ -29,6 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("users")
+@CrossOrigin(origins = "http://localhost:5173/")
 @RequiredArgsConstructor
 public class UserController {
 

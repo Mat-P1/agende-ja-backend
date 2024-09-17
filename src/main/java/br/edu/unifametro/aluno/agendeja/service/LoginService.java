@@ -18,10 +18,12 @@ public class LoginService {
     public Optional<Boolean> findByEmail(LoginRequest loginRequest) {
         var user = userRepository.findByEmail(loginRequest.email());
 
-        if (user.isEmpty() || !Arrays.equals(user.get().getPassword(), loginRequest.password()) || !user.get().getEmail().equals(loginRequest.email())) {
+        if (user.isEmpty()) {
+            throw new BadCredentialsException("User not found");
+        } else if (!Arrays.equals(user.get().getPassword(), loginRequest.password()) || !user.get().getEmail().equals(loginRequest.email())) {
             throw new BadCredentialsException("Invalid email or password");
+        } else {
+            return Optional.of(true);
         }
-
-        return Optional.of(true);
     }
 }

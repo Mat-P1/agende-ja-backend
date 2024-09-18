@@ -29,6 +29,7 @@ public class SecurityConfig {
         http.authorizeHttpRequests(configurer ->
                 configurer
                         .requestMatchers(HttpMethod.POST, "/users/sign-up", "/users/sign-in").permitAll()
+                        .anyRequest().permitAll()
         );
 
         // use HTTP Basic Authentication

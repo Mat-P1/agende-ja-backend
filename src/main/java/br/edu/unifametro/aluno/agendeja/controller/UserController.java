@@ -27,7 +27,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("users")
 @RequiredArgsConstructor
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin
 public class UserController {
 
     private final UserService userService;
@@ -42,12 +42,12 @@ public class UserController {
      * @return A {@link ResponseEntity} containing the created {@link User} and an HTTP status of CREATED.
      */
 
-    @PostMapping("/sign-up")
+    @PostMapping("/sign_up")
     public ResponseEntity<User> signUp(@RequestBody UserPostRequestBody user) {
         return new ResponseEntity<>(userService.create(user), HttpStatus.CREATED);
     }
 
-    @PostMapping("/sign-in")
+    @PostMapping("/sign_in")
     public ResponseEntity<?> signIn(@RequestBody LoginRequest loginRequest) {
         return new ResponseEntity<>(loginService.findByEmail(loginRequest), HttpStatus.OK);
     }

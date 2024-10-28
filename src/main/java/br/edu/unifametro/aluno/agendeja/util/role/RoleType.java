@@ -1,6 +1,6 @@
 package br.edu.unifametro.aluno.agendeja.util.role;
 
-public class RoleType {
+public final class RoleType {
 
     public static final String ADMIN = "ADMIN";
     public static final String PROVIDER = "PROVIDER";

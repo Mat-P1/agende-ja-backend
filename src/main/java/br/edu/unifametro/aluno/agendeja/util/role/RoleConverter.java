@@ -21,7 +21,7 @@ import java.util.stream.Stream;
  */
 
 @Converter(autoApply = true)
-public class RoleConverter implements AttributeConverter<Role, String> {
+public final class RoleConverter implements AttributeConverter<Role, String> {
 
     /**
      * Converts a {@link Role} to its corresponding string representation (authority) for storing in the database.

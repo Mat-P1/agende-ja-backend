@@ -2,25 +2,17 @@ package br.edu.unifametro.aluno.agendeja.service;
 
 import br.edu.unifametro.aluno.agendeja.domain.user.User;
 import br.edu.unifametro.aluno.agendeja.domain.user.enums.Role;
+import br.edu.unifametro.aluno.agendeja.dto.request.UserRequestDTO;
+import br.edu.unifametro.aluno.agendeja.dto.response.UserResponseDTO;
 import br.edu.unifametro.aluno.agendeja.mapper.UserMapper;
 import br.edu.unifametro.aluno.agendeja.repository.UserRepository;
-import br.edu.unifametro.aluno.agendeja.request.user.UserPostRequestBody;
 import br.edu.unifametro.aluno.agendeja.util.user.GovernmentIdValidator;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
 import java.util.UUID;
-
-/**
- * UserService is responsible for handling business logic related to user creation and management.
- * It interacts with the {@link UserRepository} for persistence and applies validation rules for user data.
- * <p>
- * Fields:
- * - {@link UserRepository}: A repository for managing user entities in the database.
- * <p>
- * Methods:
- * - {@link #create(UserPostRequestBody)}: Handles user creation, including government ID validation, assigning roles based on the type of ID, generating an external ID, and saving the user.
- */
 
 @Service
 @RequiredArgsConstructor
@@ -28,32 +20,42 @@ public class UserService {
 
     private final UserRepository userRepository;
 
-    /**
-     * Creates a new user after performing validations and assigning the appropriate role.
-     * The user's government ID is validated, and based on the type of government ID (CNPJ or CPF),
-     * the appropriate role (Provider or Client) is assigned.
-     * <p>
-     * - If the government ID is valid, an external ID is generated for the user.
-     * - If the government ID is a CNPJ, the user is assigned the role of {@link Role#PROVIDER}, otherwise {@link Role#CLIENT}.
-     * - The user data is then converted from a {@link UserPostRequestBody} to a {@link User} entity using {@link UserMapper}
-     *   and saved to the repository.
-     *
-     * @param user The {@link UserPostRequestBody} containing the user's registration details.
-     * @return The created {@link User} if the government ID is valid, otherwise returns null.
-     */
+    @Transactional
+    public UserResponseDTO create(UserRequestDTO userRequestDTO) {
 
-    public User create(UserPostRequestBody user) {
+        if (GovernmentIdValidator.isValidGovernmentId(userRequestDTO.governmentId())) {
 
-        if (GovernmentIdValidator.isValidGovernmentId(user.getGovernmentId())) {
-            user.setExternalId(UUID.randomUUID().toString());
+            User user = UserMapper.INSTANCE.requestDtoToUser(userRequestDTO);
+
+            user.setExternalId(UUID.randomUUID());
+
             if (GovernmentIdValidator.isCnpj(user.getGovernmentId())) {
-                user.setRole(Role.PROVIDER.getAuthority());
+                user.setRole(Role.PROVIDER);
             } else {
-                user.setRole(Role.CLIENT.getAuthority());
+                user.setRole(Role.CLIENT);
             }
-            userRepository.save(UserMapper.INSTANCE.postRequestBodyToUser(user));
-        }
 
-        return UserMapper.INSTANCE.postRequestBodyToUser(user);
+            User savedUser = userRepository.save(user);
+
+            return UserMapper.INSTANCE.userToResponseDTO(savedUser);
+        }
+        return null;
+    }
+
+    @Transactional
+    public UserResponseDTO update(Long id, UserRequestDTO userRequestDTO) {
+        Optional<User> existingUserOpt = userRepository.findById(id);
+        if (existingUserOpt.isPresent()) {
+            User existingUser = existingUserOpt.get();
+
+            existingUser.setFirstName(userRequestDTO.firstName());
+            existingUser.setLastName(userRequestDTO.lastName());
+            existingUser.setEmail(userRequestDTO.email());
+            existingUser.setPassword(userRequestDTO.password());
+
+            User savedUser = userRepository.save(existingUser);
+            return UserMapper.INSTANCE.userToResponseDTO(savedUser);
+        }
+        return null;
     }
 }

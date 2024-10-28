@@ -1,29 +1,24 @@
 package br.edu.unifametro.aluno.agendeja.domain.user;
 
+import br.edu.unifametro.aluno.agendeja.domain.BaseEntity;
 import br.edu.unifametro.aluno.agendeja.domain.user.enums.Role;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
 
-import java.util.UUID;
+import java.sql.Timestamp;
 
 @Entity
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Inheritance(strategy = InheritanceType.JOINED)
+@EqualsAndHashCode(callSuper = true)
 @Table(name = "users")
-public class User {
+public class User extends BaseEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "table_id", nullable = false, updatable = false, unique = true)
-    private Long tableId;
-
-    @Column(name = "external_id", nullable = false, updatable = false, unique = true)
-    private UUID externalId;
-
-    @Column(name = "government_id", nullable = false, updatable = false, unique = true, length = 14)
+    @Column(name = "government_id", nullable = false, updatable = false, length = 14)
     private String governmentId;
 
     @Column(name = "first_name", nullable = false, length = 30)
@@ -38,9 +33,13 @@ public class User {
     @Column(name = "password", nullable = false, unique = true, length = 64)
     private char[] password;
 
-    @Column(name = "phone", unique = true, length = 14)
-    private String phone;
-
     @Column(name = "role", nullable = false, length = 10)
     private Role role;
+
+    @Column(name = "cpfServiceProvider", nullable = false)
+    private boolean cpfServiceProvider;
+
+    @Column(name = "createdAt", nullable = false, updatable = false)
+    @CreationTimestamp
+    private Timestamp createdAt;
 }

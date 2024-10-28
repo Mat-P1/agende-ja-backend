@@ -13,7 +13,7 @@ import java.util.List;
  * provides methods to identify the type of ID and validate its structure and check digits.
  */
 
-public class GovernmentIdValidator {
+public final class GovernmentIdValidator {
 
     private static final List<String> SAME_NUMBER_SEQUENCE = List.of(
             "00000000000", "00000000000000", "11111111111", "11111111111111", "22222222222",
@@ -53,7 +53,7 @@ public class GovernmentIdValidator {
      */
 
     public static boolean isCnpj(String governmentId) {
-        return governmentId.length() == 14;
+        return governmentId.length() == 14 && isNotRepeatedSameNumber(governmentId);
     }
 
     /**

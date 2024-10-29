@@ -35,7 +35,5 @@ public record UserRequestDTO(
 
         @NotBlank String role,
 
-        @NotBlank boolean cpfServiceProvider,
-
-        @NotBlank Timestamp createdAt
+        @NotBlank boolean cpfServiceProvider
 ) { }

@@ -38,8 +38,4 @@ public class User extends BaseEntity {
 
     @Column(name = "cpfServiceProvider", nullable = false)
     private boolean cpfServiceProvider;
-
-    @Column(name = "createdAt", nullable = false, updatable = false)
-    @CreationTimestamp
-    private Timestamp createdAt;
 }

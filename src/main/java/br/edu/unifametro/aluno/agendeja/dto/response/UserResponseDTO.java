@@ -12,7 +12,6 @@ public record UserResponseDTO(
         String lastName,
         String email,
         Role role,
-        boolean cpfServiceProvider,
-        Timestamp createdAt
+        boolean cpfServiceProvider
 ) {
 }

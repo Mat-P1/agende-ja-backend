@@ -24,19 +24,14 @@ public class UserService {
     public UserResponseDTO create(UserRequestDTO userRequestDTO) {
 
         if (GovernmentIdValidator.isValidGovernmentId(userRequestDTO.governmentId())) {
-
             User user = UserMapper.INSTANCE.requestDtoToUser(userRequestDTO);
-
             user.setExternalId(UUID.randomUUID());
-
             if (GovernmentIdValidator.isCnpj(user.getGovernmentId())) {
                 user.setRole(Role.PROVIDER);
             } else {
                 user.setRole(Role.CLIENT);
             }
-
             User savedUser = userRepository.save(user);
-
             return UserMapper.INSTANCE.userToResponseDTO(savedUser);
         }
         return null;

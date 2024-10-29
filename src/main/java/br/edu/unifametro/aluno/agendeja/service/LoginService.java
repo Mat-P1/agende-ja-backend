@@ -26,6 +26,7 @@ public class LoginService {
         } else if (!Arrays.equals(user.get().getPassword(), loginRequestDTO.password().toCharArray()) || !user.get().getEmail().equals(loginRequestDTO.email())) {
             throw new BadCredentialsException("Invalid email or password");
         } else {
+
             return Optional.of(new LoginResponseDTO(user.get(), true));
         }
     }

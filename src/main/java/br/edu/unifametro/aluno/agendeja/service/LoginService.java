@@ -1,7 +1,8 @@
 package br.edu.unifametro.aluno.agendeja.service;
 
 import br.edu.unifametro.aluno.agendeja.domain.user.User;
-import br.edu.unifametro.aluno.agendeja.dto.request.LoginRequest;
+import br.edu.unifametro.aluno.agendeja.dto.request.LoginRequestDTO;
+import br.edu.unifametro.aluno.agendeja.dto.response.LoginResponseDTO;
 import br.edu.unifametro.aluno.agendeja.repository.UserRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -17,15 +18,15 @@ public class LoginService {
 
     private final UserRepository userRepository;
 
-    public Optional<User> findByEmail(LoginRequest loginRequest) {
-        var user = userRepository.findByEmail(loginRequest.email());
+    public Optional<LoginResponseDTO> findByEmail(LoginRequestDTO loginRequestDTO) {
+        var user = userRepository.findByEmail(loginRequestDTO.email());
 
         if (user.isEmpty()) {
             throw new BadCredentialsException("User not found");
-        } else if (!Arrays.equals(user.get().getPassword(), loginRequest.password().toCharArray()) || !user.get().getEmail().equals(loginRequest.email())) {
+        } else if (!Arrays.equals(user.get().getPassword(), loginRequestDTO.password().toCharArray()) || !user.get().getEmail().equals(loginRequestDTO.email())) {
             throw new BadCredentialsException("Invalid email or password");
         } else {
-            return user;
+            return Optional.of(new LoginResponseDTO(user.get(), true));
         }
     }
 }

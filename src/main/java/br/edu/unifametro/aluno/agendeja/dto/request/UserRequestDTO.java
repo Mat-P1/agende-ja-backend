@@ -5,8 +5,6 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
-import java.sql.Timestamp;
-
 public record UserRequestDTO(
 
         @NotBlank
@@ -36,4 +34,5 @@ public record UserRequestDTO(
         @NotBlank String role,
 
         @NotBlank boolean cpfServiceProvider
-) { }
+) {
+}

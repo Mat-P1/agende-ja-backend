@@ -1,7 +1,8 @@
 package br.edu.unifametro.aluno.agendeja.controller;
 
-import br.edu.unifametro.aluno.agendeja.dto.request.LoginRequest;
+import br.edu.unifametro.aluno.agendeja.dto.request.LoginRequestDTO;
 import br.edu.unifametro.aluno.agendeja.dto.request.UserRequestDTO;
+import br.edu.unifametro.aluno.agendeja.dto.response.LoginResponseDTO;
 import br.edu.unifametro.aluno.agendeja.dto.response.UserResponseDTO;
 import br.edu.unifametro.aluno.agendeja.service.LoginService;
 import br.edu.unifametro.aluno.agendeja.service.UserService;
@@ -10,6 +11,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 @RestController
 @RequestMapping("users")
@@ -27,8 +30,9 @@ public class UserController {
     }
 
     @PostMapping("/sign_in")
-    public ResponseEntity<?> signIn(@RequestBody LoginRequest loginRequest) {
-        return new ResponseEntity<>(loginService.findByEmail(loginRequest), HttpStatus.OK);
+    public ResponseEntity<LoginResponseDTO> signIn(@RequestBody LoginRequestDTO loginRequestDTO) {
+        Optional<LoginResponseDTO> loginResponseDTO = loginService.findByEmail(loginRequestDTO);
+        return loginResponseDTO.map(responseDTO -> new ResponseEntity<>(responseDTO, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
     @PutMapping("edit/{id}")

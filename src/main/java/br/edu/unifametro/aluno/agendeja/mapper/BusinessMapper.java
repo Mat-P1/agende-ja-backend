@@ -14,6 +14,10 @@ public interface BusinessMapper {
 
     Business businessRequestDtoToBusiness(BusinessRequestDTO businessRequestDTO);
 
+    @Mapping(target = "businessId", source = "business.id")
     @Mapping(target = "userExternalId", source = "user.externalId")
+    @Mapping(target = "userGovernmentId", source = "user.governmentId")
+    @Mapping(target = "userFirstName", source = "user.firstName")
+    @Mapping(target = "userLastName", source = "user.lastName")
     BusinessResponseDTO businessToBusinessResponseDTO(Business business);
 }

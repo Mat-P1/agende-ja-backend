@@ -22,4 +22,10 @@ public class BusinessController {
         BusinessResponseDTO businessResponseDTO = businessService.create(id, businessRequestDTO);
         return new ResponseEntity<>(businessResponseDTO, HttpStatus.CREATED);
     }
+
+    @GetMapping("/registered/{id}")
+    ResponseEntity<BusinessResponseDTO> getBusiness(@PathVariable Long id) {
+        BusinessResponseDTO businessResponseDTO = businessService.getById(id);
+        return new ResponseEntity<>(businessResponseDTO, HttpStatus.OK);
+    }
 }

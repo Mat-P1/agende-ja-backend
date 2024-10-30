@@ -38,4 +38,13 @@ public class BusinessService {
            throw new UsernameNotFoundException("User not found");
         }
     }
+
+    @Transactional
+    public BusinessResponseDTO getById(Long id) {
+        Optional<Business> business = businessRepository.findById(id);
+        if (business.isPresent()) {
+            return BusinessMapper.INSTANCE.businessToBusinessResponseDTO(business.get());
+        }
+        throw new UsernameNotFoundException("Business not found");
+    }
 }

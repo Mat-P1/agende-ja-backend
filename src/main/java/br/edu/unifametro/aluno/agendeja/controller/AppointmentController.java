@@ -19,7 +19,7 @@ public class AppointmentController {
 
     private final AppointmentService appointmentService;
 
-    @PostMapping
+    @PostMapping("/schedule")
     public ResponseEntity<AppointmentResponseDTO> create(@RequestBody AppointmentRequestDTO appointmentRequestDTO) {
         AppointmentResponseDTO appointmentResponseDTO = appointmentService.create(appointmentRequestDTO);
         return new ResponseEntity<>(appointmentResponseDTO, HttpStatus.CREATED);

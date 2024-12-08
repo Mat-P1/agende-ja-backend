@@ -1,7 +1,6 @@
 package br.edu.unifametro.aluno.agendeja.domain.booking;
 
 import br.edu.unifametro.aluno.agendeja.domain.BaseEntity;
-import br.edu.unifametro.aluno.agendeja.domain.booking.enums.AppointmentStatus;
 import br.edu.unifametro.aluno.agendeja.domain.business.Business;
 import br.edu.unifametro.aluno.agendeja.domain.user.User;
 import jakarta.persistence.*;
@@ -30,17 +29,14 @@ public class Appointment extends BaseEntity {
     @Column(name = "end")
     private LocalDateTime end;
 
-    @Column(name = "status", nullable = false, length = 10)
-    private AppointmentStatus status;
-
     @Column(name = "appointment_description", nullable = false, length = 40, updatable = false)
     private String appointmentDescription;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE})
     @JoinColumn(name = "user_table_id", updatable = false)
     private User user;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE})
     @JoinColumn(name = "business_table_id", updatable = false)
     private Business business;
 }

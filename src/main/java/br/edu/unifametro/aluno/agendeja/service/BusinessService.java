@@ -12,8 +12,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -46,5 +48,13 @@ public class BusinessService {
             return BusinessMapper.INSTANCE.businessToBusinessResponseDTO(business.get());
         }
         throw new UsernameNotFoundException("Business not found");
+    }
+
+    @Transactional
+    public List<BusinessResponseDTO> getAll() {
+        List<Business> businesses = businessRepository.findAll();
+        return businesses.stream()
+                .map(BusinessMapper.INSTANCE::businessToBusinessResponseDTO)
+                .collect(Collectors.toList());
     }
 }

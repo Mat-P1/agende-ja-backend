@@ -9,6 +9,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("businesses")
 @RequiredArgsConstructor
@@ -27,5 +29,11 @@ public class BusinessController {
     ResponseEntity<BusinessResponseDTO> getBusiness(@PathVariable Long id) {
         BusinessResponseDTO businessResponseDTO = businessService.getById(id);
         return new ResponseEntity<>(businessResponseDTO, HttpStatus.OK);
+    }
+
+    @GetMapping("/all")
+    public ResponseEntity<List<BusinessResponseDTO>> getAll() {
+        List<BusinessResponseDTO> businesses = businessService.getAll();
+        return new ResponseEntity<>(businesses, HttpStatus.OK);
     }
 }

@@ -42,12 +42,14 @@ public class BusinessService {
     }
 
     @Transactional
-    public BusinessResponseDTO getById(Long id) {
-        Optional<Business> business = businessRepository.findById(id);
-        if (business.isPresent()) {
-            return BusinessMapper.INSTANCE.businessToBusinessResponseDTO(business.get());
+    public List<BusinessResponseDTO> getById(Long id) {
+        List<Business> businesses = businessRepository.findByUserId(id);
+        if (businesses.isEmpty()) {
+            throw new UsernameNotFoundException("Business not found");
         }
-        throw new UsernameNotFoundException("Business not found");
+        return businesses.stream()
+                .map(BusinessMapper.INSTANCE::businessToBusinessResponseDTO)
+                .collect(Collectors.toList());
     }
 
     @Transactional

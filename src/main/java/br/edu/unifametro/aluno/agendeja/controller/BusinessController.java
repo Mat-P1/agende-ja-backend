@@ -26,8 +26,8 @@ public class BusinessController {
     }
 
     @GetMapping("/registered/{id}")
-    ResponseEntity<BusinessResponseDTO> getBusiness(@PathVariable Long id) {
-        BusinessResponseDTO businessResponseDTO = businessService.getById(id);
+    ResponseEntity<List<BusinessResponseDTO>> getBusiness(@PathVariable Long id) {
+        List<BusinessResponseDTO> businessResponseDTO = businessService.getById(id);
         return new ResponseEntity<>(businessResponseDTO, HttpStatus.OK);
     }
 

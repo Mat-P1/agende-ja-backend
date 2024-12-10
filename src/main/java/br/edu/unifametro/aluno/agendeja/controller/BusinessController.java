@@ -36,4 +36,14 @@ public class BusinessController {
         List<BusinessResponseDTO> businesses = businessService.getAll();
         return new ResponseEntity<>(businesses, HttpStatus.OK);
     }
+
+    @PutMapping("edit/{id}")
+    public ResponseEntity<BusinessResponseDTO> updateUser(@PathVariable Long id, @RequestBody BusinessRequestDTO businessRequestDTO) {
+        BusinessResponseDTO businessResponseDTO = businessService.update(id, businessRequestDTO);
+        if (businessResponseDTO != null) {
+            return new ResponseEntity<>(businessResponseDTO, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
 }

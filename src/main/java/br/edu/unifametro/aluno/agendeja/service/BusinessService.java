@@ -59,4 +59,20 @@ public class BusinessService {
                 .map(BusinessMapper.INSTANCE::businessToBusinessResponseDTO)
                 .collect(Collectors.toList());
     }
+
+    @Transactional
+    public BusinessResponseDTO update(Long id, BusinessRequestDTO businessRequestDTO) {
+        Optional<Business> existingBusinessOpt = businessRepository.findById(id);
+        if (existingBusinessOpt.isPresent()) {
+            Business existingBusiness = existingBusinessOpt.get();
+
+            existingBusiness.setBusinessName(businessRequestDTO.businessName());
+            existingBusiness.setBusinessDescription(businessRequestDTO.businessDescription());
+            existingBusiness.setBusinessPhoneNumber(businessRequestDTO.businessPhoneNumber());
+
+            Business savedBusiness = businessRepository.save(existingBusiness);
+            return BusinessMapper.INSTANCE.businessToBusinessResponseDTO(savedBusiness);
+        }
+        return null;
+    }
 }

@@ -25,25 +25,25 @@ public class AppointmentController {
         return new ResponseEntity<>(appointmentResponseDTO, HttpStatus.CREATED);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/appointment/{id}")
     public ResponseEntity<AppointmentResponseDTO> getById(@PathVariable Long id) {
         AppointmentResponseDTO appointmentResponseDTO = appointmentService.getByExternalId(id);
         return new ResponseEntity<>(appointmentResponseDTO, HttpStatus.OK);
     }
 
-    @GetMapping
+    @GetMapping("/appointments")
     public ResponseEntity<List<AppointmentResponseDTO>> getAll() {
         List<AppointmentResponseDTO> appointments = appointmentService.getAll();
         return new ResponseEntity<>(appointments, HttpStatus.OK);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("edit/{id}")
     public ResponseEntity<AppointmentResponseDTO> update(@PathVariable Long id, @RequestBody AppointmentRequestDTO appointmentRequestDTO) {
         AppointmentResponseDTO appointmentResponseDTO = appointmentService.update(id, appointmentRequestDTO);
         return new ResponseEntity<>(appointmentResponseDTO, HttpStatus.OK);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("delete/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         appointmentService.delete(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);

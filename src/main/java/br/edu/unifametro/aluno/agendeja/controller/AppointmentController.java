@@ -19,17 +19,23 @@ public class AppointmentController {
 
     private final AppointmentService appointmentService;
 
+    /* Cria um novo agendamento */
+
     @PostMapping("/schedule")
     public ResponseEntity<AppointmentResponseDTO> create(@RequestBody AppointmentRequestDTO appointmentRequestDTO) {
         AppointmentResponseDTO appointmentResponseDTO = appointmentService.create(appointmentRequestDTO);
         return new ResponseEntity<>(appointmentResponseDTO, HttpStatus.CREATED);
     }
 
+    /* Mostra agendamentos pelo id */
+
     @GetMapping("/appointment/{id}")
     public ResponseEntity<AppointmentResponseDTO> getById(@PathVariable Long id) {
-        AppointmentResponseDTO appointmentResponseDTO = appointmentService.getByExternalId(id);
+        AppointmentResponseDTO appointmentResponseDTO = appointmentService.getById(id);
         return new ResponseEntity<>(appointmentResponseDTO, HttpStatus.OK);
     }
+
+    /* Mostra todos os agendamentos */
 
     @GetMapping("/appointments")
     public ResponseEntity<List<AppointmentResponseDTO>> getAll() {
@@ -37,11 +43,15 @@ public class AppointmentController {
         return new ResponseEntity<>(appointments, HttpStatus.OK);
     }
 
+    /* Editar um agendamento */
+
     @PutMapping("edit/{id}")
     public ResponseEntity<AppointmentResponseDTO> update(@PathVariable Long id, @RequestBody AppointmentRequestDTO appointmentRequestDTO) {
         AppointmentResponseDTO appointmentResponseDTO = appointmentService.update(id, appointmentRequestDTO);
         return new ResponseEntity<>(appointmentResponseDTO, HttpStatus.OK);
     }
+
+    /* Deletar um agendamento */
 
     @DeleteMapping("delete/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {

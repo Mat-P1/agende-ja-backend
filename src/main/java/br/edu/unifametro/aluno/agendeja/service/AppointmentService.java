@@ -27,7 +27,7 @@ public class AppointmentService {
         return AppointmentMapper.INSTANCE.appointmentToResponseDTO(savedAppointment);
     }
 
-    public AppointmentResponseDTO getByExternalId(Long id) {
+    public AppointmentResponseDTO getById(Long id) {
         Appointment appointment = appointmentRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Appointment not found"));
         return AppointmentMapper.INSTANCE.appointmentToResponseDTO(appointment);

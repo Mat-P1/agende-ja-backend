@@ -5,6 +5,7 @@ import java.util.UUID;
 
 public record AppointmentResponseDTO(
         UUID externalId,
+        String businessName,
         LocalDateTime start,
         LocalDateTime end,
         String appointmentDescription,

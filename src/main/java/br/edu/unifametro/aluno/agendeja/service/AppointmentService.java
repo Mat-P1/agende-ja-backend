@@ -27,14 +27,15 @@ public class AppointmentService {
         return AppointmentMapper.INSTANCE.appointmentToResponseDTO(savedAppointment);
     }
 
-    public AppointmentResponseDTO getById(Long id) {
-        Appointment appointment = appointmentRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Appointment not found"));
-        return AppointmentMapper.INSTANCE.appointmentToResponseDTO(appointment);
+    public List<AppointmentResponseDTO> getByUserId(Long id) {
+        List<Appointment> appointments = appointmentRepository.findByUserId(id);
+        return appointments.stream()
+                .map(AppointmentMapper.INSTANCE::appointmentToResponseDTO)
+                .collect(Collectors.toList());
     }
 
-    public List<AppointmentResponseDTO> getAll() {
-        List<Appointment> appointments = appointmentRepository.findAll();
+    public List<AppointmentResponseDTO> getByBusinessId(Long id) {
+        List<Appointment> appointments = appointmentRepository.findByBusinessId(id);
         return appointments.stream()
                 .map(AppointmentMapper.INSTANCE::appointmentToResponseDTO)
                 .collect(Collectors.toList());

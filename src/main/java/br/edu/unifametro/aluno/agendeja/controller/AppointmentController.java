@@ -27,19 +27,19 @@ public class AppointmentController {
         return new ResponseEntity<>(appointmentResponseDTO, HttpStatus.CREATED);
     }
 
-    /* Mostra agendamentos pelo id */
+    /* Mostra todos os agendamentos associados ao id do user */
 
-    @GetMapping("/appointment/{id}")
-    public ResponseEntity<AppointmentResponseDTO> getById(@PathVariable Long id) {
-        AppointmentResponseDTO appointmentResponseDTO = appointmentService.getById(id);
+    @GetMapping("/user/{id}")
+    public ResponseEntity<List<AppointmentResponseDTO>> getByUserId(@PathVariable Long id) {
+        List<AppointmentResponseDTO> appointmentResponseDTO = appointmentService.getByUserId(id);
         return new ResponseEntity<>(appointmentResponseDTO, HttpStatus.OK);
     }
 
-    /* Mostra todos os agendamentos */
+    /* Mostra todos os agendamentos associados ao id do business */
 
-    @GetMapping("/appointments")
-    public ResponseEntity<List<AppointmentResponseDTO>> getAll() {
-        List<AppointmentResponseDTO> appointments = appointmentService.getAll();
+    @GetMapping("/business/{id}")
+    public ResponseEntity<List<AppointmentResponseDTO>> getByBusinessId(@PathVariable Long id) {
+        List<AppointmentResponseDTO> appointments = appointmentService.getByBusinessId(id);
         return new ResponseEntity<>(appointments, HttpStatus.OK);
     }
 

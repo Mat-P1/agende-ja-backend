@@ -19,5 +19,6 @@ public interface AppointmentMapper {
     @Mapping(target = "userId", source = "user.id")
     @Mapping(target = "businessId", source = "business.id")
     @Mapping(target = "businessName", source = "business.businessName")
+    @Mapping(target = "appointmentId", source = "appointment.id")
     AppointmentResponseDTO appointmentToResponseDTO(Appointment appointment);
 }
